@@ -44,17 +44,15 @@ hist(aggregate(steps~date,step_data,sum)[,2],
 
 ## 3.  Mean and median number of steps taken each day
 The mean of steps (observations) for each day is aggregated and stored in **avg_steps**.
-The *Means* and *Medians* are plotted vs. Date below.  The *Means* varies from 0 to nearly 80 while the *Medians* are always 0.
+The mean and median are calculated below.
 ```{r}
 avg_steps <- merge(aggregate(steps~date,step_proc,mean),
                  aggregate(steps~date,step_proc,median),
                  by = "date")
 names(avg_steps) <- c("Date","Means","Medians")
+mean(avg_steps$Means)
+mean(avg_steps$Medians)
 library(ggplot2)
-ggplot(avg_steps,aes(Date),main="Mean and Median Steps plotted vs. Date")+
-     geom_line(aes(y = Means, colour = "Means")) + 
-     geom_line(aes(y = Medians, colour = "Medians")) + #72% of step values are 0
-     ylab("Steps")
 ```
 
 Further investigation into the values of the *Median* reveals the proportion of 0 values in **step_proc**.*median* is.
